@@ -16,8 +16,8 @@ WORKDIR /code/
 
 COPY galaxy-common/Pipfile galaxy-common/Pipfile.lock \
      /tmp/galaxy-common/
-COPY galaxy-importer/Pipfile galaxy-worker/Pipfile.lock \
-     /tmp/galaxy-worker/
+COPY galaxy-importer/Pipfile galaxy-importer/Pipfile.lock \
+     /tmp/galaxy-importer/
 COPY galaxy-worker/Pipfile galaxy-worker/Pipfile.lock \
      /tmp/galaxy-worker/
 COPY galaxy-api/Pipfile galaxy-api/Pipfile.lock \
