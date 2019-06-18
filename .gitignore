@@ -1,5 +1,2 @@
 .env
 
-galaxy-common/
-galaxy-api/
-galaxy-worker/

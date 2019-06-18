@@ -1,0 +1,12 @@
+[submodule "galaxy-common"]
+	path = galaxy-common
+	url = https://github.com/ansible/galaxy-common
+[submodule "galaxy-api"]
+	path = galaxy-api
+	url = https://github.com/ansible/galaxy-api
+[submodule "galaxy-worker"]
+	path = galaxy-worker
+	url = https://github.com/ansible/galaxy-worker
+[submodule "galaxy-importer"]
+	path = galaxy-importer
+	url = https://github.com/ansible/galaxy-importer
