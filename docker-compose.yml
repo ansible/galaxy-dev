@@ -1,0 +1,61 @@
+version: '3.4'
+
+x-defaults: &defaults
+  image: galaxy-dev/galaxy-api
+  volumes:
+    - '.:/code/'
+  environment:
+    - GALAXY_DEBUG=True
+    - GALAXY_SECRET_KEY=secret
+    - GALAXY_DB_HOST=postgres
+    - GALAXY_DB_PASSWORD=galaxy
+    - GALAXY_RABBITMQ_HOST=rabbitmq
+    - GALAXY_RABBITMQ_PASSWORD=galaxy
+  depends_on:
+    - postgres
+    - rabbitmq
+#    - redis
+
+volumes:
+  postgres_data: {}
+
+services:
+  galaxy-api:
+    <<: *defaults
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '5000:5000'
+    command: run api
+
+#  galaxy-scheduler:
+#    <<: *defaults
+#    command: run scheduler
+
+  galaxy-worker:
+    <<: *defaults
+    command: run worker
+
+  postgres:
+    image: 'postgres:11'
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=galaxy
+      - POSTGRES_USER=galaxy
+      - POSTGRES_PASSWORD=galaxy
+
+  rabbitmq:
+    image: 'rabbitmq:3.7'
+    environment:
+      - RABBITMQ_DEFAULT_USER=galaxy
+      - RABBITMQ_DEFAULT_PASS=galaxy
+      - RABBITMQ_DEFAULT_VHOST=galaxy
+
+#
+#  redis:
+#    image: 'redis:5.0'
+#
