@@ -20,7 +20,6 @@ source "${VENV_DIR}/bin/activate"
 _prepare() {
     for proj in "${PROJECTS[@]}"; do
         pushd "/${CODE_DIR}/$proj" >/dev/null
-        pipenv install
         pip install -e .
         popd >/dev/null
     done
@@ -63,6 +62,7 @@ main() {
             run_service "${@:2}"
         ;;
         'manage')
+            _prepare
             exec "${VENV_DIR}/bin/galaxy-manage" "${@:2}"
         ;;
         *)
