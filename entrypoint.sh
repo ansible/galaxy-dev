@@ -31,7 +31,7 @@ run_api() {
 }
 
 run_scheduler() {
-    exec celery -A galaxy_worker.app worker beat --loglevel INFO
+    exec celery -A galaxy_worker.app beat --loglevel INFO
 }
 
 run_worker() {
