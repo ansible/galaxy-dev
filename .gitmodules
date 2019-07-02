@@ -4,3 +4,6 @@
 [submodule "galaxy-importer"]
 	path = galaxy-importer
 	url = git@github.com:ansible/galaxy-importer.git
+[submodule "pulp-ansible"]
+	path = pulp-ansible
+	url = git@github.com:pulp/pulp_ansible.git
