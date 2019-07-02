@@ -28,6 +28,7 @@ _wait_for_tcp_port() {
 }
 
 _prepare_env() {
+  pip install -e "${PULP_CODE}/pulp-ansible"
   _wait_for_tcp_port postgres 5432
   _wait_for_tcp_port redis 6379
 }
