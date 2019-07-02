@@ -1,0 +1,3 @@
+CREATE ROLE galaxy WITH LOGIN PASSWORD 'galaxy123';
+
+CREATE DATABASE galaxy OWNER galaxy;

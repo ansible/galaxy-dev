@@ -17,15 +17,15 @@ Getting started
 
 #. Build development docker image::
 
-    $ docker-compose build
+    $ make docker/build
 
 #. Run migrations::
 
-    $ docker-compose run --rm galaxy-api manage migrate
+    $ make docker/run-migrations
 
 #. Run development environment::
 
-    $ docker-compose up
+    $ make docker/up
 
 
 Installing local dependencies\*
@@ -45,14 +45,11 @@ Installing local dependencies\*
 
     $ pip install pipenv
 
-#. Install projects dependencies::
+#. Install galaxy-api dependencies::
 
-    $ git submodule foreach pipenv install
-
-#. Install projects in development mode::
-
-    $ git submodule foreach pip install -e .
-
+    $ cd galaxy-api
+    $ pipenv install
+    $ pip install -e .
 
 Configuring local management script\*
 =====================================
@@ -64,4 +61,4 @@ Configuring local management script\*
 
 #. Set `SECRET_KEY` parameter.
 
-#. Now you can run `galaxy-manage` command from local environment.
+#. Now you can run `galaxy-api-manage` command from local environment.

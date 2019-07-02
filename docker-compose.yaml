@@ -1,0 +1,83 @@
+version: '3.4'
+
+volumes:
+  postgres_data: {}
+  redis_data: {}
+
+services:
+
+  galaxy-api:
+    image: galaxy-dev/galaxy-api
+    build:
+      context: .
+      dockerfile: docker/galaxy-api/Dockerfile
+    env_file:
+      - ./docker/galaxy-api/.env
+    ports:
+      - '5001:8000'
+    volumes:
+      - ./galaxy-api:/code/galaxy-api
+    depends_on:
+      - postgres
+
+  pulp-api:
+    image: galaxy-dev/pulp
+    build:
+      context: .
+      dockerfile: docker/pulp/Dockerfile
+    env_file:
+      - ./docker/pulp/.env
+    command: ['run', 'api']
+    ports:
+      - '5002:8000'
+    volumes:
+      - ./pulp-ansible:/code/pulp-ansible
+    depends_on:
+      - postgres
+      - redis
+
+  pulp-resource-manager:
+    image: galaxy-dev/pulp
+    env_file:
+      - ./docker/pulp/.env
+    command: ['run', 'resource-manager']
+    volumes:
+      - ./pulp-ansible:/code/pulp-ansible
+    depends_on:
+      - postgres
+      - redis
+
+  pulp-worker:
+    image: galaxy-dev/pulp
+    env_file:
+      - ./docker/pulp/.env
+    command: ['run', 'worker']
+    volumes:
+      - ./pulp-ansible:/code/pulp-ansible
+    depends_on:
+      - postgres
+      - redis
+
+  pulp-content-app:
+    image: galaxy-dev/pulp
+    env_file:
+      - ./docker/pulp/.env
+    command: ['run', 'content-app']
+    volumes:
+      - ./pulp-ansible:/code/pulp-ansible
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:11
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./docker/postgres/initdb.d/:/docker-entrypoint-initdb.d:ro
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:5
+    volumes:
+      - redis_data:/data
