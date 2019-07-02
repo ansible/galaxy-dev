@@ -12,7 +12,7 @@ services:
       context: .
       dockerfile: docker/galaxy-api/Dockerfile
     env_file:
-      - ./docker/galaxy-api/.env
+      - ./docker/galaxy-api/env
     ports:
       - '5001:8000'
     volumes:
@@ -26,7 +26,7 @@ services:
       context: .
       dockerfile: docker/pulp/Dockerfile
     env_file:
-      - ./docker/pulp/.env
+      - ./docker/pulp/env
     command: ['run', 'api']
     ports:
       - '5002:8000'
@@ -39,7 +39,7 @@ services:
   pulp-resource-manager:
     image: galaxy-dev/pulp
     env_file:
-      - ./docker/pulp/.env
+      - ./docker/pulp/env
     command: ['run', 'resource-manager']
     volumes:
       - ./pulp-ansible:/code/pulp-ansible
@@ -50,7 +50,7 @@ services:
   pulp-worker:
     image: galaxy-dev/pulp
     env_file:
-      - ./docker/pulp/.env
+      - ./docker/pulp/env
     command: ['run', 'worker']
     volumes:
       - ./pulp-ansible:/code/pulp-ansible
@@ -61,7 +61,7 @@ services:
   pulp-content-app:
     image: galaxy-dev/pulp
     env_file:
-      - ./docker/pulp/.env
+      - ./docker/pulp/env
     command: ['run', 'content-app']
     volumes:
       - ./pulp-ansible:/code/pulp-ansible
