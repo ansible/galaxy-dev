@@ -1,3 +1,4 @@
-mazer
-pulpcore-plugin~=0.1rc2
 psycopg2-binary
+mazer
+git+https://github.com/pulp/pulpcore.git#egg=pulpcore
+git+https://github.com/pulp/pulpcore-plugin.git#egg=pulpcore_plugin
