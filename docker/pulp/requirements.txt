@@ -1,4 +1,5 @@
 psycopg2-binary
 mazer
+packaging
 git+https://github.com/pulp/pulpcore.git#egg=pulpcore
 git+https://github.com/pulp/pulpcore-plugin.git#egg=pulpcore_plugin
