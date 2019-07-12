@@ -10,3 +10,5 @@ DATABASES = {
         'PORT': os.environ.get('PULP_DB_PORT', ''),
     }
 }
+
+ANSIBLE_API_HOSTNAME = ''
