@@ -15,7 +15,6 @@ RUN yum -y install epel-release \
 
 RUN mkdir -p /var/run/pulp
 
-COPY docker/pulp/settings.py /etc/pulp/settings.py
 COPY docker/pulp/requirements.txt /tmp/pulp/
 
 RUN python3.6 -m venv "${PULP_VENV}" \
