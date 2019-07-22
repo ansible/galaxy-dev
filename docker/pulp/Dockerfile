@@ -19,7 +19,9 @@ COPY docker/pulp/requirements.txt /tmp/pulp/
 
 RUN python3.6 -m venv "${PULP_VENV}" \
     && source "${PULP_VENV}/bin/activate" \
-    && pip --no-cache-dir install -U pip wheel \
+    && pip --no-cache-dir install -U \
+        'pip<19.0' \
+        wheel \
     && cd /tmp/pulp \
     && pip install -r requirements.txt
 

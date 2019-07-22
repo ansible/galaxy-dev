@@ -25,6 +25,10 @@ help:
 docker/build:
 	docker-compose build
 
+.PHONY: docker/rebuild
+docker/rebuild:
+	docker-compose build --no-cache
+
 .PHONY: docker/up
 docker/up:
 	docker-compose up --build -d

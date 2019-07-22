@@ -19,7 +19,10 @@ COPY galaxy-api/Pipfile \
 
 RUN python3.6 -m venv "${GALAXY_VENV}" \
     && source "${GALAXY_VENV}/bin/activate" \
-    && pip --no-cache-dir install -U pip wheel pipenv \
+    && pip --no-cache-dir install -U \
+        'pip<19.0' \
+        wheel \
+        pipenv \
     && cd /tmp/galaxy-api \
     && PIPENV_VERBOSITY=-1 pipenv install --ignore-pipfile
 
