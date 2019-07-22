@@ -31,6 +31,7 @@ services:
     ports:
       - '5002:8000'
     volumes:
+      - ./docker/pulp/settings.py:/etc/pulp/settings.py:ro
       - ./pulp-ansible:/code/pulp-ansible
     depends_on:
       - postgres
@@ -42,6 +43,7 @@ services:
       - ./docker/pulp/env
     command: ['run', 'resource-manager']
     volumes:
+      - ./docker/pulp/settings.py:/etc/pulp/settings.py:ro
       - ./pulp-ansible:/code/pulp-ansible
     depends_on:
       - postgres
@@ -53,6 +55,7 @@ services:
       - ./docker/pulp/env
     command: ['run', 'worker']
     volumes:
+      - ./docker/pulp/settings.py:/etc/pulp/settings.py:ro
       - ./pulp-ansible:/code/pulp-ansible
     depends_on:
       - postgres
@@ -64,6 +67,7 @@ services:
       - ./docker/pulp/env
     command: ['run', 'content-app']
     volumes:
+      - ./docker/pulp/settings.py:/etc/pulp/settings.py:ro
       - ./pulp-ansible:/code/pulp-ansible
     depends_on:
       - postgres
