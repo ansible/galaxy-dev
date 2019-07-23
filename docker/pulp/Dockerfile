@@ -25,9 +25,12 @@ RUN python3.6 -m venv "${PULP_VENV}" \
     && cd /tmp/pulp \
     && pip install -r requirements.txt
 
-WORKDIR /code/
-
 ENV PATH="/venv/bin:$PATH"
 
 COPY docker/pulp/entrypoint.sh /entrypoint
+
+VOLUME /data/
+
+WORKDIR /code/
+
 ENTRYPOINT [ "/entrypoint" ]
