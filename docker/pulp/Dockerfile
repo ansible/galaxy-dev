@@ -13,7 +13,8 @@ RUN yum -y install epel-release \
         python36-devel \
     && yum -y clean all
 
-RUN mkdir -p /var/run/pulp
+RUN mkdir -p /var/run/pulp \
+    /var/lib/pulp/tmp
 
 COPY docker/pulp/requirements.txt /tmp/pulp/
 
