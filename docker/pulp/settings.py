@@ -12,3 +12,5 @@ DATABASES = {
 }
 
 ANSIBLE_API_HOSTNAME = ''
+
+MEDIA_ROOT = '/data/'

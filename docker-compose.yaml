@@ -3,6 +3,7 @@ version: '3.4'
 volumes:
   postgres_data: {}
   redis_data: {}
+  pulp_data: {}
 
 services:
 
@@ -33,6 +34,7 @@ services:
     volumes:
       - ./docker/pulp/settings.py:/etc/pulp/settings.py:ro
       - ./pulp-ansible:/code/pulp-ansible
+      - pulp_data:/data
     depends_on:
       - postgres
       - redis
@@ -45,6 +47,7 @@ services:
     volumes:
       - ./docker/pulp/settings.py:/etc/pulp/settings.py:ro
       - ./pulp-ansible:/code/pulp-ansible
+      - pulp_data:/data
     depends_on:
       - postgres
       - redis
@@ -57,6 +60,7 @@ services:
     volumes:
       - ./docker/pulp/settings.py:/etc/pulp/settings.py:ro
       - ./pulp-ansible:/code/pulp-ansible
+      - pulp_data:/data
     depends_on:
       - postgres
       - redis
@@ -69,6 +73,7 @@ services:
     volumes:
       - ./docker/pulp/settings.py:/etc/pulp/settings.py:ro
       - ./pulp-ansible:/code/pulp-ansible
+      - pulp_data:/data
     depends_on:
       - postgres
       - redis
