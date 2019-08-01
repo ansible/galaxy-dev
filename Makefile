@@ -10,6 +10,7 @@ Docker commands:
   docker/up                     - Start docker environment in detached mode.
   docker/logs                   - Display docker environment logs.
   docker/down                   - Stop and remove containers.
+  docker/destroy                - Stop and remove containers and data volumes.
   docker/run-migrations         - Run migrations in docker environment.
 
 endef
@@ -40,6 +41,10 @@ docker/logs:
 .PHONY: docker/down
 docker/down:
 	docker-compose down
+
+.PHONY: docker/destroy
+docker/destroy:
+	docker-compose down --volumes
 
 .PHONY: docker/run-migrations
 docker/run-migrations:
