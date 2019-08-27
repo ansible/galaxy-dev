@@ -14,3 +14,5 @@ DATABASES = {
 ANSIBLE_API_HOSTNAME = ''
 
 MEDIA_ROOT = '/data/'
+
+GALAXY_API_ROOT='api/<str:path>/'

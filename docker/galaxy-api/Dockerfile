@@ -1,3 +1,14 @@
+# Stage 1: Build galaxy-pulp from openapi spec
+FROM openapitools/openapi-generator-cli AS galaxy-pulp
+
+COPY galaxy-api/bindings/openapi.yaml /local/openapi.yaml
+RUN docker-entrypoint.sh generate \
+    -i /local/openapi.yaml \
+    -g python \
+    -o /local/galaxy-pulp \
+    --additional-properties=packageName=galaxy_pulp,projectName=galaxy-pulp
+
+# Stage 2: Build galaxy image
 FROM centos:7
 
 ENV PYTHONUNBUFFERED=1 \
@@ -13,6 +24,7 @@ RUN yum -y install epel-release \
         python36-devel \
     && yum -y clean all
 
+
 COPY galaxy-api/Pipfile \
     galaxy-api/Pipfile.lock \
     /tmp/galaxy-api/
@@ -25,6 +37,10 @@ RUN python3.6 -m venv "${GALAXY_VENV}" \
         pipenv \
     && cd /tmp/galaxy-api \
     && PIPENV_VERBOSITY=-1 pipenv install --ignore-pipfile
+
+COPY --from=galaxy-pulp /local/galaxy-pulp /tmp/galaxy-pulp
+RUN source "${GALAXY_VENV}/bin/activate" \
+    && pip install /tmp/galaxy-pulp
 
 WORKDIR /code/
 

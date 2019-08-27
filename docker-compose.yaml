@@ -20,6 +20,7 @@ services:
       - ./galaxy-api:/code/galaxy-api
     depends_on:
       - postgres
+      - pulp-api
 
   pulp-api:
     image: galaxy-dev/pulp
