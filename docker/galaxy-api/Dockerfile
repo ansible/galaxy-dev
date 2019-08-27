@@ -6,6 +6,7 @@ RUN docker-entrypoint.sh generate \
     -i /local/openapi.yaml \
     -g python \
     -o /local/galaxy-pulp \
+    --skip-validate-spec \
     --additional-properties=packageName=galaxy_pulp,projectName=galaxy-pulp
 
 # Stage 2: Build galaxy image
