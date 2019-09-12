@@ -11,6 +11,8 @@ DATABASES = {
     }
 }
 
+CONTENT_PATH_PREFIX = '/api/automation-hub/v3/artifacts/collections/'
+
 ANSIBLE_API_HOSTNAME = ''
 
 MEDIA_ROOT = '/data/'
