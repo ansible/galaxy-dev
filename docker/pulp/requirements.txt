@@ -1,6 +1,5 @@
 ansible==2.9.0b1
 psycopg2-binary
-mazer
-packaging
-git+https://github.com/pulp/pulpcore.git@06c1aeeb8e58a93bf190adcdcf5c41e8ea215975#egg=pulpcore
-git+https://github.com/pulp/pulpcore-plugin.git@0e8f9e7720a4f28afaefa258bd7c0d2429eb99b4#egg=pulpcore_plugin
+
+git+https://github.com/pulp/pulpcore.git@800e70f73caf1f5a12e849887729b4bb0875a2fd#egg=pulpcore
+git+https://github.com/pulp/pulpcore-plugin.git@2e911fe8623030cf9481a9013043e710bf7e4c23#egg=pulpcore_plugin
