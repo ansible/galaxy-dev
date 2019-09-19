@@ -11,7 +11,7 @@ DATABASES = {
     }
 }
 
-CONTENT_PATH_PREFIX = '/api/automation-hub/artifacts/collections/'
+CONTENT_PATH_PREFIX = '/api/automation-hub/v3/artifacts/collections/'
 
 ANSIBLE_API_HOSTNAME = ''
 
