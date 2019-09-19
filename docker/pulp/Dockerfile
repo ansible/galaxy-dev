@@ -24,7 +24,9 @@ RUN python3.6 -m venv "${PULP_VENV}" \
         'pip<19.0' \
         wheel \
     && cd /tmp/pulp \
-    && pip install -r requirements.txt
+    && pip install --default-timeout 100 -r requirements.txt
+
+COPY docker/pulp/ansible.cfg /etc/ansible/ansible.cfg
 
 ENV PATH="/venv/bin:$PATH"
 
