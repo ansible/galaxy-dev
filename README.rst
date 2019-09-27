@@ -15,6 +15,12 @@ Getting started
 
     $ git submodule update --init --remote
 
+#. (Workaround) Checkout pulp_ansible version 0.2.0b3::
+
+    $ cd pulp_ansible/
+
+    $ git checkout 0.2.0b3
+
 #. Build development docker image::
 
     $ make docker/build
@@ -27,38 +33,56 @@ Getting started
 
     $ make docker/up
 
+#. Create galaxy admin user::
 
-Installing local dependencies\*
-===============================
+    $ docker-compose run --rm galaxy-api manage createsuperuser
 
-`optional`
+    Username: admin
+    Password: admin
 
-#. Go to ``galaxy-dev`` directory.
+#. Create pulp admin user::
 
-#. Create and activate virtual environment::
+    $ docker-compose run --rm pulp-api manage createsuperuser
 
-    $ python3 -m venv .venv
+    Username: admin
+    Password: admin
 
-    $ source .venv/bin/activate
+  .. note:: If you want to use different user credentials, make sure pulp credentials
+        are updated in ``galaxy-api/galaxy_api/settings.py``.
 
-#. Install pipenv::
+#. Create pulp repository and distribution::
 
-    $ pip install pipenv
+    $ docker-compose run --rm pulp-api manage shell
 
-#. Install galaxy-api dependencies::
+    Python 3.6.8 (default, Aug  7 2019, 17:28:10)
+    [GCC 4.8.5 20150623 (Red Hat 4.8.5-39)] on linux
+    Type "help", "copyright", "credits" or "license" for more information.
+    (InteractiveConsole)
 
-    $ cd galaxy-api
-    $ pipenv install
-    $ pip install -e .
+    >>> from pulpcore.app.models import Repository
+    >>> from pulp_ansible.app.models import AnsibleDistribution
 
-Configuring local management script\*
-=====================================
+    >>> repo = Repository.objects.create(name='automation-hub')
 
-`optional`
+    >>> AnsibleDistribution.objects.create(name='automation-hub', base_path='automation-hub', repository=repo)
+    <AnsibleDistribution: automation-hub>
 
-#. Copy `.env.example` to `.env`. `.env.example` contains defaults for local environment, so normally it should work
-   without customizations.
+    >>> # Press <CTRL+D> to exit.
 
-#. Set `SECRET_KEY` parameter.
+.. note:: If API is running without UI, authorization can be disabled for testing
+          purposes but commenting default permission classes
+          in ``galaxy-api/galaxy_api/settings.py``::
 
-#. Now you can run `galaxy-api-manage` command from local environment.
+                REST_FRAMEWORK = {
+                    # ...
+                    'DEFAULT_PERMISSION_CLASSES': [
+                        # 'rest_framework.permissions.IsAuthenticated',
+                        # 'galaxy_api.auth.auth.RHEntitlementRequired',
+                    ],
+                    # ...
+                }
+
+
+* Galaxy API URL:  http://localhost:5001/api/automation-hub/v3/
+* Galaxy admin site URL: http://localhost:5001/admin/
+* Pulp API URL: http://localhost:5002/
