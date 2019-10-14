@@ -1,5 +1,5 @@
 ansible==2.9.0b1
 psycopg2-binary
 
-pulpcore==3.0.0rc5
-pulpcore-plugin==0.1.0rc5
+git+https://github.com/pulp/pulpcore.git#egg=pulpcore
+git+https://github.com/pulp/pulpcore-plugin.git#egg=pulpcore_plugin
