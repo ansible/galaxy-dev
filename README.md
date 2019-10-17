@@ -19,7 +19,7 @@
 3. (Workaround) Checkout pulp_ansible version 0.2.0b3
 
    ```
-   $ cd pulp_ansible/
+   $ cd pulp-ansible/
 
    $ git checkout 0.2.0b3
    ```
