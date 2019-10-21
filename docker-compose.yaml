@@ -33,7 +33,6 @@ services:
     ports:
       - '5002:8000'
     volumes:
-      - ./docker/pulp/settings.py:/etc/pulp/settings.py:ro
       - ./pulp-ansible:/code/pulp-ansible
       - pulp_data:/data
     depends_on:
@@ -46,7 +45,6 @@ services:
       - ./docker/pulp/env
     command: ['run', 'resource-manager']
     volumes:
-      - ./docker/pulp/settings.py:/etc/pulp/settings.py:ro
       - ./pulp-ansible:/code/pulp-ansible
       - pulp_data:/data
     depends_on:
@@ -59,7 +57,6 @@ services:
       - ./docker/pulp/env
     command: ['run', 'worker']
     volumes:
-      - ./docker/pulp/settings.py:/etc/pulp/settings.py:ro
       - ./pulp-ansible:/code/pulp-ansible
       - pulp_data:/data
     depends_on:
@@ -72,7 +69,6 @@ services:
       - ./docker/pulp/env
     command: ['run', 'content-app']
     volumes:
-      - ./docker/pulp/settings.py:/etc/pulp/settings.py:ro
       - ./pulp-ansible:/code/pulp-ansible
       - pulp_data:/data
     depends_on:
