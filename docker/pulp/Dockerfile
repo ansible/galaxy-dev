@@ -4,6 +4,7 @@ ENV PYTHONUNBUFFERED=1 \
     LANG=en_US.UTF-8 \
     PULP_CODE=/code \
     PULP_VENV=/venv \
+    PULP_SETTINGS=/etc/pulp/settings.py \
     DJANGO_SETTINGS_MODULE=pulpcore.app.settings
 
 RUN yum -y install epel-release \
