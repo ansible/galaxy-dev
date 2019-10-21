@@ -1,6 +1,14 @@
-# Galaxy development tools
+# Automation Hub Backend
 
-## Getting started
+Backend API for Automation Hub. The frontend project is [ansible-hub-ui](https://github.com/ansible/ansible-hub-ui).
+
+## OpenAPI Spec
+
+View the latest version of the spec by [clicking here](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/ansible/galaxy-api/master/openapi/openapi.yaml).
+
+## Creating a Local DEV environment
+
+To configure and run the API locally follow these steps: 
 
 1. Clone `galaxy-dev` repository
 
@@ -101,3 +109,5 @@ REST_FRAMEWORK = {
 - Galaxy API URL: http://localhost:5001/api/automation-hub/v3/
 - Galaxy admin site URL: http://localhost:5001/admin/
 - Pulp API URL: http://localhost:5002/
+
+For instructions on setting up and running the Automation Hub frontend, visit the [ansible-hub-ui project](https://github.com/ansible/ansible-hub-ui).
