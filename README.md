@@ -1,6 +1,6 @@
 # Automation Hub Backend
 
-Backend API for Automation Hub. The frontend UI project is [ansible-hub-ui](https://github.com/ansible/ansible-hub-ui).
+Backend project for Automation Hub. The frontend UI project is [ansible-hub-ui](https://github.com/ansible/ansible-hub-ui).
 
 ## OpenAPI Spec
 
