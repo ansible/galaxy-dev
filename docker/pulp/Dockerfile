@@ -25,7 +25,10 @@ RUN python3.6 -m venv "${PULP_VENV}" \
         'pip<19.0' \
         wheel \
     && cd /tmp/pulp \
-    && pip install --default-timeout 100 -r requirements.txt
+    && pip install --default-timeout 100 -r requirements.txt \
+
+# FIXME(cutwater): This is temporary fix for ansible/galaxy-dev#141
+RUN chmod -R a+rwX /venv
 
 COPY docker/pulp/settings.py /etc/pulp/settings.py
 COPY docker/pulp/ansible.cfg /etc/ansible/ansible.cfg
