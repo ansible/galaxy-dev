@@ -1,4 +1,4 @@
-ansible==2.9.0b1
+ansible==2.9.0rc5
 psycopg2-binary
 
 git+https://github.com/pulp/pulpcore.git#egg=pulpcore
