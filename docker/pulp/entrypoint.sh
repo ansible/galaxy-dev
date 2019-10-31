@@ -68,6 +68,7 @@ run_resource_manager() {
 }
 
 run_worker() {
+  pip install "${PULP_CODE}"/importer-plugins/*.whl
   _prepare_env
   exec rq worker \
       -w 'pulpcore.tasking.worker.PulpWorker' \

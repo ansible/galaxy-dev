@@ -58,6 +58,7 @@ services:
     command: ['run', 'worker']
     volumes:
       - ./pulp-ansible:/code/pulp-ansible
+      - ./docker/importer-plugins:/code/importer-plugins
       - pulp_data:/data
     depends_on:
       - postgres
