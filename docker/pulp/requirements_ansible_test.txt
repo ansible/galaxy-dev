@@ -1,0 +1,10 @@
+ansible==2.9.0rc5
+cryptography
+jinja2
+pycodestyle
+pylint
+pyyaml
+rstcheck
+virtualenv
+voluptuous
+yamllint
