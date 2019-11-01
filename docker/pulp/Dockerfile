@@ -17,7 +17,8 @@ RUN yum -y install epel-release \
 
 RUN mkdir -p /var/run/pulp \
     /var/lib/pulp/tmp \
-    "${ANSIBLE_TEST_VENV}"
+    "${ANSIBLE_TEST_VENV}" \
+    /.ansible
 
 COPY docker/pulp/requirements.txt /tmp/pulp/
 COPY docker/pulp/requirements_ansible_test.txt /tmp/ansible_test/
