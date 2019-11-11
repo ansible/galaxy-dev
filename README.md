@@ -110,6 +110,19 @@ REST_FRAMEWORK = {
 - Galaxy admin site URL: http://localhost:5001/admin/
 - Pulp API URL: http://localhost:5002/
 
+## Running unit tests
+
+To be able to run unit tests, database user permission to create a database need to be changed:
+
+1. make sure you have the right permissions for Docker file volumes
+2. open Postgres client from `pulp` Docker image: `docker-compose exec postgres psql -U postgres pulp`
+3. give `galaxy` user permission to run `createdb`: `ALTER USER galaxy CREATEDB;`
+
+To run unit tests:
+
+1. install [`tox`](https://tox.readthedocs.io/en/latest/): `pip install --user tox`
+2. run the unit tests: `galaxy-dev/galaxy-api/ $ tox -e py36,flake8`
+
 ## Running the UI Locally
 
 For instructions on how to add the Automation Hub UI to your local environment, visit the [ansible-hub-ui frontend project](https://github.com/ansible/ansible-hub-ui).
