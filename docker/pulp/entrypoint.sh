@@ -62,7 +62,7 @@ run_resource_manager() {
   _prepare_env
   exec rq worker \
       -w 'pulpcore.tasking.worker.PulpWorker' \
-      -n 'resource-manager@%h' \
+      -n 'resource-manager@automation-hub' \
       -c 'pulpcore.rqconfig' \
       --pid='/var/run/pulp/resource_manager.pid'
 }
@@ -74,7 +74,7 @@ run_worker() {
   _prepare_env
   exec rq worker \
       -w 'pulpcore.tasking.worker.PulpWorker' \
-      -n "reserved-resource-worker@%h" \
+      -n "reserved-resource-worker@automation-hub" \
       -c 'pulpcore.rqconfig' \
       --pid="/var/run/pulp/worker.pid"
 }
