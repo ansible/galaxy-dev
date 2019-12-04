@@ -33,7 +33,6 @@ services:
     ports:
       - '5002:8000'
     volumes:
-      - ./pulp-ansible:/code/pulp-ansible
       - pulp_data:/data
     depends_on:
       - postgres
@@ -45,7 +44,6 @@ services:
       - ./docker/pulp/env
     command: ['run', 'resource-manager']
     volumes:
-      - ./pulp-ansible:/code/pulp-ansible
       - pulp_data:/data
     depends_on:
       - postgres
@@ -57,7 +55,6 @@ services:
       - ./docker/pulp/env
     command: ['run', 'worker']
     volumes:
-      - ./pulp-ansible:/code/pulp-ansible
       - ./docker/importer-plugins:/code/importer-plugins
       - pulp_data:/data
     depends_on:
@@ -70,7 +67,6 @@ services:
       - ./docker/pulp/env
     command: ['run', 'content-app']
     volumes:
-      - ./pulp-ansible:/code/pulp-ansible
       - pulp_data:/data
     depends_on:
       - postgres
