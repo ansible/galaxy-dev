@@ -1,0 +1,6 @@
+ansible
+psycopg2-binary
+pyyaml<5.2
+
+git+https://github.com/pulp/pulpcore.git@742b40e5563c6401f2d10e3d605cc2c502fd1a3e#egg=pulpcore
+git+https://github.com/pulp/pulp_ansible.git@e8a9176cef731b7646aa770608ec2276802ccd10#egg=pulp_ansible
