@@ -1,20 +1,9 @@
 #!/bin/bash
 
-# NOTE: This line should be before setting bash modes, because
-# `scl_source` is not compatible with `set -o nounset`.
-ENABLED_COLLECTIONS="${ENABLED_COLLECTIONS:-}"
-if [[ ! -z "${ENABLED_COLLECTIONS}" ]]; then
-  source scl_source enable ${ENABLED_COLLECTIONS}
-fi
-
-
 set -o nounset
 set -o errexit
 
-
 PULP_CODE="${PULP_CODE}"
-PULP_VENV="${PULP_VENV}"
-
 
 _wait_for_tcp_port() {
   local -r host="$1"
@@ -39,9 +28,6 @@ _wait_for_tcp_port() {
 }
 
 _prepare_env() {
-  VIRTUAL_ENV_DISABLE_PROMPT=1 \
-    source "${PULP_VENV}/bin/activate"
-  pip install --no-cache-dir -e "${PULP_CODE}/pulp_ansible"
   _wait_for_tcp_port postgres 5432
   _wait_for_tcp_port redis 6379
 }
@@ -82,7 +68,7 @@ run_resource_manager() {
 
 run_worker() {
   if [ "$(ls ${PULP_CODE}/importer-plugins)" ]; then
-      pip install --no-cache-dir "${PULP_CODE}"/importer-plugins/*.whl
+      pip install "${PULP_CODE}"/importer-plugins/*.whl
   fi
   _prepare_env
   exec rq worker \
