@@ -78,6 +78,8 @@ services:
 
   postgres:
     image: postgres:11
+    env_file:
+      - ./docker/postgres/env
     ports:
       - '5432:5432'
     volumes:
