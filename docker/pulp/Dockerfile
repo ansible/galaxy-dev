@@ -9,7 +9,6 @@ ENV PYTHONUNBUFFERED=1 \
     ANSIBLE_TEST_VENV=/venv_ansible_test \
     ENABLED_COLLECTIONS="rh-python36 rh-postgresql12"
 
-
 RUN yum -y install centos-release-scl-rh \
     && yum -y install \
         gcc \
@@ -31,8 +30,7 @@ RUN source scl_source enable ${ENABLED_COLLECTIONS} \
     && python3.6 -m venv "${ANSIBLE_TEST_VENV}" \
     && source "${ANSIBLE_TEST_VENV}/bin/activate" \
     && pip --no-cache-dir install -U \
-        pip \
-        wheel \
+        'pip>=20.0,<21.0' \
     && cd /tmp/ansible_test \
     && pip install \
         --no-cache-dir \
@@ -43,9 +41,8 @@ RUN source scl_source enable ${ENABLED_COLLECTIONS} \
 RUN source scl_source enable ${ENABLED_COLLECTIONS} \
     && python3.6 -m venv "${PULP_VENV}" \
     && source "${PULP_VENV}/bin/activate" \
-    && pip --no-cache-dir install -U \
-        pip \
-        wheel \
+    && pip install --no-cache-dir -U \
+        'pip>=20.0,<21.0' \
     && pip --no-cache-dir install \
         -c /tmp/constraints.txt \
         -e "${PULP_CODE}/pulp_ansible"
