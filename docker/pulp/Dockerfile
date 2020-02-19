@@ -49,13 +49,8 @@ RUN source scl_source enable ${ENABLED_COLLECTIONS} \
 
 COPY docker/pulp/settings.py /etc/pulp/settings.py
 COPY docker/pulp/ansible.cfg /etc/ansible/ansible.cfg
-
-ENV PATH="/venv/bin:$PATH"
-
 COPY docker/pulp/entrypoint.sh /entrypoint
 
 VOLUME /data/
-
 WORKDIR /code/
-
 ENTRYPOINT [ "/entrypoint" ]
