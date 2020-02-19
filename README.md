@@ -8,7 +8,7 @@ View the latest version of the spec by [clicking here](https://petstore.swagger.
 
 ## Create a Local DEV Environment
 
-To configure and run the API locally follow these steps: 
+To configure and run the API locally follow these steps:
 
 1. Clone `galaxy-dev` repository
 
@@ -81,10 +81,9 @@ To configure and run the API locally follow these steps:
    Type "help", "copyright", "credits" or "license" for more information.
    (InteractiveConsole)
 
-   >>> from pulpcore.app.models import Repository
-   >>> from pulp_ansible.app.models import AnsibleDistribution
+   >>> from pulp_ansible.app.models import AnsibleRepository, AnsibleDistribution
 
-   >>> repo = Repository.objects.create(name='automation-hub')
+   >>> repo = AnsibleRepository.objects.create(name='automation-hub')
 
    >>> AnsibleDistribution.objects.create(name='automation-hub', base_path='automation-hub', repository=repo)
    <AnsibleDistribution: automation-hub>
