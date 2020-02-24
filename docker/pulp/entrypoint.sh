@@ -15,6 +15,8 @@ set -o errexit
 PULP_CODE="${PULP_CODE}"
 PULP_VENV="${PULP_VENV}"
 
+VIRTUAL_ENV_DISABLE_PROMPT=1 source "${PULP_VENV}/bin/activate"
+
 
 _wait_for_tcp_port() {
   local -r host="$1"
@@ -39,8 +41,6 @@ _wait_for_tcp_port() {
 }
 
 _prepare_env() {
-  VIRTUAL_ENV_DISABLE_PROMPT=1 \
-    source "${PULP_VENV}/bin/activate"
   pip install --no-cache-dir -e "${PULP_CODE}/pulp_ansible"
   _wait_for_tcp_port postgres 5432
   _wait_for_tcp_port redis 6379
