@@ -10,32 +10,30 @@ RUN docker-entrypoint.sh generate \
     --additional-properties=packageName=galaxy_pulp,projectName=galaxy-pulp
 
 # Stage 2: Build galaxy image
-FROM centos:7
+FROM centos:8
 
-ENV PYTHONUNBUFFERED=1 \
-    LANG=en_US.UTF-8 \
+ENV LANG=en_US.UTF-8 \
+    PYTHONUNBUFFERED=1 \
+    DJANGO_SETTINGS_MODULE=galaxy_api.settings \
     GALAXY_CODE=/code \
-    GALAXY_VENV=/venv \
-    DJANGO_SETTINGS_MODULE=galaxy_api.settings
+    GALAXY_VENV=/venv
 
-RUN yum -y install epel-release \
-    && yum -y install \
-        git \
-        python36 \
-        python36-devel \
-    && yum -y clean all
+RUN dnf install -y \
+        glibc-langpack-en \
+        git-core \
+        python3 \
+        python3-devel \
+    && dnf -y clean all
 
 
 COPY galaxy-api/Pipfile \
     galaxy-api/Pipfile.lock \
     /tmp/galaxy-api/
 
-RUN python3.6 -m venv "${GALAXY_VENV}" \
+RUN python3 -m venv "${GALAXY_VENV}" \
     && source "${GALAXY_VENV}/bin/activate" \
     && pip --no-cache-dir install -U \
-        'pip<19.0' \
-        wheel \
-        pipenv \
+        pip wheel pipenv \
     && cd /tmp/galaxy-api \
     && PIPENV_VERBOSITY=-1 pipenv install --ignore-pipfile
 
@@ -45,7 +43,8 @@ RUN source "${GALAXY_VENV}/bin/activate" \
 
 WORKDIR /code/
 
-ENV PATH="/venv/bin:$PATH"
+# Activate virual env
+ENV PATH="${GALAXY_VENV}/bin:${PATH}"
 
 COPY docker/galaxy-api/entrypoint.sh /entrypoint
 ENTRYPOINT [ "/entrypoint" ]

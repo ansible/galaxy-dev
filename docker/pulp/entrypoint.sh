@@ -1,22 +1,10 @@
 #!/bin/bash
 
-# NOTE: This line should be before setting bash modes, because
-# `scl_source` is not compatible with `set -o nounset`.
-ENABLED_COLLECTIONS="${ENABLED_COLLECTIONS:-}"
-if [[ ! -z "${ENABLED_COLLECTIONS}" ]]; then
-  source scl_source enable ${ENABLED_COLLECTIONS}
-fi
-
-
 set -o nounset
 set -o errexit
 
-
 PULP_CODE="${PULP_CODE}"
 PULP_VENV="${PULP_VENV}"
-
-VIRTUAL_ENV_DISABLE_PROMPT=1 source "${PULP_VENV}/bin/activate"
-
 
 _wait_for_tcp_port() {
   local -r host="$1"
