@@ -1,3 +1,7 @@
+## DEPRECATED
+
+Please visit the [Galaxy NextGen project](https://github.com/ansible/galaxy_ng)
+
 # Automation Hub Backend
 
 Backend project for Automation Hub. The frontend UI project is [ansible-hub-ui](https://github.com/ansible/ansible-hub-ui).
